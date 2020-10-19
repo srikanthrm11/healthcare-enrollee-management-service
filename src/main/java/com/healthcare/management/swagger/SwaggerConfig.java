@@ -11,10 +11,20 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author srikanthreddy
+ * 
+ * This class handles generation of swagger using Docket 
+ *
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 	
+	/**
+	 * This method returns Docket used for Swagger Doc generation
+	 * @return Docket
+	 */
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select().paths(PathSelectors.ant("/api/**"))
@@ -22,6 +32,10 @@ public class SwaggerConfig {
 
 	}
 
+	/**
+	 * This method handles custom API meta info
+	 * @return ApiInfo
+	 */
 	private ApiInfo apiMetaData() {
 		return new ApiInfoBuilder().title("HealthCare Enrolle Management API").description(
 				"This API provides Add , Retrieve, Update and Delete features for Enrollees and Respective Dependents in HealthCare Management")

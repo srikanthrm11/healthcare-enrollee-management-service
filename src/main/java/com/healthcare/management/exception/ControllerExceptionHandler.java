@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+/**
+ * @author srikanthreddy
+ *
+ *This class handles centralized exception handling across rest contoller methods
+ */
 @ControllerAdvice
 public class ControllerExceptionHandler {
 

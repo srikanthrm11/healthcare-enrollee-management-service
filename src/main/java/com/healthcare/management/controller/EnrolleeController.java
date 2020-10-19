@@ -18,6 +18,12 @@ import com.healthcare.management.dao.EnrolleeService;
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;
 
+/**
+ * @author srikanthreddy
+ * 
+ * This is the controller class exposing different endpoints for enrollee management
+ *
+ */
 @RestController
 @RequestMapping(path = "/api")
 public class EnrolleeController {
@@ -31,23 +37,43 @@ public class EnrolleeController {
 
 	}
 
+	/**
+	 * REST endpoint for handling Add Enrollee to system
+	 * @param enrollee
+	 * @return Enrollee , HTTPStatus 201
+	 */
 	@PostMapping(path = "/add/enrollee",consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Enrollee> addEnrolle(@RequestBody @Valid Enrollee enrollee) {
 		return new ResponseEntity<>(enrolleService.addEnrolle(enrollee), HttpStatus.CREATED);
 
 	}
 
+	/**
+	 * REST endpoint to retrieve specific enrollee by passing ID
+	 * @param id
+	 * @return Enrollee, HTTPStatus 200
+	 */
 	@GetMapping(path = "/get/enrollee/{id}", produces = "application/json")
 	public ResponseEntity<Enrollee> getEnrollebyId(@PathVariable String id) {
 		return new ResponseEntity<>(enrolleService.getEnrolleById(id), HttpStatus.OK);
 
 	}
 
+	/**
+	 * REST endpoint to delete specific enrollee by passing ID
+	 * @param id
+	 * return HTTPStatus 204
+	 */
 	@DeleteMapping(value = "/delete/{id}", produces = "application/json")
 	public void deleteEnrollebyId(@PathVariable String id) {
 		enrolleService.deleteEnrolle(id);
 	}
 
+	/**
+	 * REST endpoint to update/modify specific enrollee and their dependents
+	 * @param EnrolleeUpdate enrollee
+	 * @return Enrollee, 200
+	 */
 	@PutMapping(value = "/update/enrollee", consumes = "application/json", produces = "application/json")
 	public Enrollee updateEnrolle(@RequestBody EnrolleeUpdate enrollee) {
 		return enrolleService.updateEnrolle(enrollee);

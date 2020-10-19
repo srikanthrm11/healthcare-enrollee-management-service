@@ -4,6 +4,11 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+// Mongo DB annotation and entity
+/**
+ * @author srikanthreddy
+ *
+ */
 @Document(collection = "Enrollees")
 public class Enrollee extends Person {
 

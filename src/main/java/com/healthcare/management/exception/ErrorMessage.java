@@ -2,6 +2,10 @@ package com.healthcare.management.exception;
 
 import java.util.Date;
 
+/**
+ * @author srikanthreddy
+ *
+ */
 public class ErrorMessage {
 
 	private int statusCode;
