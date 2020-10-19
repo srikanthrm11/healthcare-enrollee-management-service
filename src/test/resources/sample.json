@@ -1,0 +1,15 @@
+{
+	"activationStatus": false,
+	"phoneNumber": "515555555",
+	"dependents": [{
+		"id": "d1",
+		"name": "dependent1",
+		"birthDate": "today"
+	}, {
+		"id": "d2",
+		"name": "dependent2",
+		"birthDate": "today2"
+	}],
+	"id": "1",
+	"name": "user1"
+}
