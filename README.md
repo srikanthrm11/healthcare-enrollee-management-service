@@ -38,6 +38,9 @@ This service addtionally provides Dockerfile and docker-compose.yml for easy set
 
   http://localhost:8080/actuator/
 
+## POSTMAN Collection for Testing is available here
+	https://github.com/srikanthrm11/postman-col-health-care-enrollee-service.git
+	
 ## Enrollee Management Related REST endpoints
 
 ### Add Enrollee 
