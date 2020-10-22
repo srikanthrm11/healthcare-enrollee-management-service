@@ -3,6 +3,7 @@ package com.healthcare.management.dto;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 /**
  * @author srikanthreddy
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.Id;
 public class Person {
 
 	@NotBlank
+	@Indexed
 	@Id
 	private String id;
 

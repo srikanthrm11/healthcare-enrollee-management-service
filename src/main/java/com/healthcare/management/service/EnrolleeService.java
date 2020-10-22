@@ -1,4 +1,4 @@
-package com.healthcare.management.dao;
+package com.healthcare.management.service;
 
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;

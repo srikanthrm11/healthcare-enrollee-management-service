@@ -16,6 +16,7 @@ import com.healthcare.management.dto.Dependent;
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;
 import com.healthcare.management.exception.ResourceNotFoundException;
+import com.healthcare.management.service.EnrolleeServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

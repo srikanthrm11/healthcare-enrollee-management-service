@@ -17,8 +17,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.healthcare.management.dao.EnrolleeService;
 import com.healthcare.management.dto.Enrollee;
+import com.healthcare.management.service.EnrolleeService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = EnrolleeController.class)

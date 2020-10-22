@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.healthcare.management.dao.EnrolleeService;
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;
+import com.healthcare.management.service.EnrolleeService;
 
 /**
  * @author srikanthreddy

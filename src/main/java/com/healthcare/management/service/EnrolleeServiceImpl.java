@@ -1,4 +1,4 @@
-package com.healthcare.management.dao;
+package com.healthcare.management.service;
 
 import java.util.Objects;
 
@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.healthcare.management.dao.EnrolleeRepository;
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;
 import com.healthcare.management.dto.EnrolleeUpdate.UPDATEDEPENDENTS;
@@ -20,25 +21,32 @@ import com.healthcare.management.exception.ResourceNotFoundException;
 public class EnrolleeServiceImpl implements EnrolleeService {
 
 	/**
-	 * EnrolleeRepository will use the Mongodb-Repository to perform the database operations.
+	 * EnrolleeRepository will use the Mongodb-Repository to perform the database
+	 * operations.
 	 */
 	@Autowired
 	private EnrolleeRepository enrolleRepository;
 
-	/* (non-Javadoc)
-	 * @see com.healthcare.management.dao.EnrolleeService#getEnrolleById(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.healthcare.management.dao.EnrolleeService#getEnrolleById(java.lang.
+	 * String)
 	 */
 	@Override
 	public Enrollee getEnrolleById(String id) {
-		if (enrolleRepository.findById(id).isPresent()) {
+		try {
 			return enrolleRepository.findById(id).get();
-		} else {
-			throw new ResourceNotFoundException("Enrollee not found for provided enrollee Id");
+		} catch (Exception e) {
+			throw new ResourceNotFoundException("Enrollee not found for provided enrollee Id" + e.getMessage());
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.healthcare.management.dao.EnrolleeService#addEnrolle(com.healthcare.management.dto.Enrollee)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.healthcare.management.dao.EnrolleeService#addEnrolle(com.healthcare.
+	 * management.dto.Enrollee)
 	 */
 	@Override
 	public Enrollee addEnrolle(Enrollee enrolle) {
@@ -55,8 +63,12 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.healthcare.management.dao.EnrolleeService#updateEnrolle(com.healthcare.management.dto.EnrolleeUpdate)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.healthcare.management.dao.EnrolleeService#updateEnrolle(com.healthcare.
+	 * management.dto.EnrolleeUpdate)
 	 */
 	@Override
 	public Enrollee updateEnrolle(EnrolleeUpdate enrolleUpdate) {
@@ -87,8 +99,11 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see com.healthcare.management.dao.EnrolleeService#deleteEnrolle(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.healthcare.management.dao.EnrolleeService#deleteEnrolle(java.lang.String)
 	 */
 	@Override
 	public void deleteEnrolle(String id) {
@@ -107,6 +122,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 
 	/**
 	 * This method handles processing either adding or removing dependents
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
@@ -121,6 +137,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 
 	/**
 	 * This method delegates modifying phoneNumber, Name, BirthDate,ActivationStatus
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
@@ -134,6 +151,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 
 	/**
 	 * This method handles modifying phoneNumber
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
@@ -142,9 +160,10 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 			enrollee.setPhoneNumber(enrolleUpdate.getPhoneNumber());
 		}
 	}
-	
+
 	/**
 	 * This method handles modifying BirthDate
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
@@ -153,9 +172,10 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 			enrollee.setBirthDate(enrolleUpdate.getBirthDate());
 		}
 	}
-	
+
 	/**
 	 * This method handles modifying EnrolleeName
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
@@ -167,15 +187,12 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 
 	/**
 	 * This method handles modifying ActivationStatus
+	 * 
 	 * @param enrolleUpdate
 	 * @param enrollee
 	 */
 	private void updateActivationStatus(EnrolleeUpdate enrolleUpdate, Enrollee enrollee) {
-		if (enrolleUpdate.isActivationStatus()) {
-			enrollee.setActivationStatus(true);
-		} else {
-			enrollee.setActivationStatus(false);
-		}
+		enrollee.setActivationStatus(enrolleUpdate.isActivationStatus());
 	}
 
 }
