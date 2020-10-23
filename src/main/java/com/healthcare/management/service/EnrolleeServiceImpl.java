@@ -50,9 +50,9 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 	 */
 	@Override
 	public Enrollee addEnrolle(Enrollee enrolle) {
+
 		if (enrolleRepository.findById(enrolle.getId()).isPresent()) {
 			throw new HealthCareEnrolleeException("Enrollee already present with specified Id");
-
 		} else {
 			try {
 				return enrolleRepository.save(enrolle);
@@ -77,7 +77,7 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 			try {
 				enrolle1 = enrolleRepository.findById(enrolleUpdate.getId()).get();
 			} catch (Exception ex) {
-				throw new ResourceNotFoundException("Enrollee not found for provided enrollee Id");
+				throw new HealthCareEnrolleeException("Enrollee not found for provided enrollee Id");
 			}
 			if (Objects.nonNull(enrolle1)) {
 				if (enrolleUpdate.isModifyEmployee()) {
@@ -107,17 +107,14 @@ public class EnrolleeServiceImpl implements EnrolleeService {
 	 */
 	@Override
 	public void deleteEnrolle(String id) {
-		if (enrolleRepository.findById(id).isPresent()) {
-			Enrollee enrolle = enrolleRepository.findById(id).get();
-			try {
-				enrolleRepository.delete(enrolle);
-			} catch (Exception e) {
-				throw new HealthCareEnrolleeException("unable to delete enrolle");
-			}
 
-		} else {
-			throw new ResourceNotFoundException("Enrollee not found for provided enrollee Id");
+		try {
+			Enrollee enrolle = enrolleRepository.findById(id).get();
+			enrolleRepository.delete(enrolle);
+		} catch (Exception e) {
+			throw new HealthCareEnrolleeException("unable to delete enrolle" + e.getMessage());
 		}
+
 	}
 
 	/**

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.healthcare.management.dto.Dependent;
 import com.healthcare.management.dto.Enrollee;
 import com.healthcare.management.dto.EnrolleeUpdate;
+import com.healthcare.management.exception.HealthCareEnrolleeException;
 import com.healthcare.management.exception.ResourceNotFoundException;
 import com.healthcare.management.service.EnrolleeServiceImpl;
 
@@ -112,15 +113,23 @@ public class EnrolleeServiceTest {
 	}
 
 	@Test
-	public void deleteEnrolleTest() throws Exception {
-
-		enrolleeServiceImpl.deleteEnrolle("1");
+	public void getEnrolleTestException() throws Exception {
 
 		try {
 			enrolleeServiceImpl.getEnrolleById("1");
 		} catch (Exception e) {
 			Assert.assertTrue(e instanceof ResourceNotFoundException);
-			Assert.assertTrue("Enrollee not found for provided enrollee Id".equals(e.getMessage()));
+			Assert.assertTrue("Enrollee not found for provided enrollee IdNo value present".equals(e.getMessage()));
+		}
+	}
+
+	@Test
+	public void deleteEnrolleTestException() throws Exception {
+		try {
+			enrolleeServiceImpl.deleteEnrolle("10");
+		} catch (Exception e) {
+			Assert.assertTrue(e instanceof HealthCareEnrolleeException);
+			Assert.assertTrue("unable to delete enrolleNo value present".equals(e.getMessage()));
 		}
 
 	}
@@ -139,6 +148,23 @@ public class EnrolleeServiceTest {
 		Assert.assertEquals("2", enrollee.getId());
 		Assert.assertNotNull(enrollee.getName());
 		Assert.assertEquals("updatedUser2", enrollee.getName());
+
+	}
+
+	@Test
+	public void updateEnrolleTestException() throws Exception {
+
+		EnrolleeUpdate enrolleeUpdate = new EnrolleeUpdate();
+		enrolleeUpdate.setId("15");
+		enrolleeUpdate.setModifyEmployee(true);
+		enrolleeUpdate.setName("updatedUser2");
+
+		try {
+			Enrollee enrollee = enrolleeServiceImpl.updateEnrolle(enrolleeUpdate);
+		} catch (Exception e) {
+			Assert.assertTrue(e instanceof HealthCareEnrolleeException);
+			Assert.assertTrue("Enrollee not found for provided enrollee Id".equals(e.getMessage()));
+		}
 
 	}
 
